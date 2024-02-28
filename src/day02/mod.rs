@@ -65,10 +65,9 @@ impl AdventDay for Day02 {
         for line in read.lines() {
             let line = line?;
             let parts: Vec<&str> = line.splitn(2, ':').collect();
+            let rounds = parts[1].split(';');
 
             let mut line_max = (0, 0, 0);
-
-            let rounds = parts[1].split(';');
 
             for round in rounds {
                 let mut max_values = line_max;

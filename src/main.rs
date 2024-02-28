@@ -1,5 +1,6 @@
 mod day01;
 mod day02;
+mod day03;
 mod day_trait;
 
 use day_trait::AdventDay;
@@ -7,6 +8,7 @@ use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+
     if args.len() != 3 {
         println!("Usage: cargo run -- <day> <part>");
         return;
@@ -18,6 +20,7 @@ fn main() {
     match day.as_str() {
         "day01" => run_day(&day01::Day01, part),
         "day02" => run_day(&day02::Day02, part),
+        "day03" => run_day(&day03::Day03, part),
         _ => println!("Day not recognized"),
     }
 }
