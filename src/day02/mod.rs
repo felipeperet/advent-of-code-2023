@@ -27,7 +27,7 @@ impl AdventDay for Day02 {
                 let colors = re_round.captures_iter(round).fold(
                     (None, None, None),
                     |(red, green, blue), cap| {
-                        let value = cap[1].parse::<i32>().unwrap_or(0);
+                        let value = cap[1].parse().unwrap_or(0);
                         match &cap[2] {
                             "red" => (Some(value), green, blue),
                             "green" => (red, Some(value), blue),
