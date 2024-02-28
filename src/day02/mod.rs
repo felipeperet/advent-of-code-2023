@@ -29,6 +29,7 @@ impl AdventDay for Day02 {
                     (None, None, None),
                     |(red, green, blue), cap| {
                         let value = cap[1].parse().unwrap_or(0);
+
                         match &cap[2] {
                             "red" => (Some(value), green, blue),
                             "green" => (red, Some(value), blue),
@@ -37,6 +38,7 @@ impl AdventDay for Day02 {
                         }
                     },
                 );
+
                 colors.0.map_or(true, |v| v <= 12)
                     && colors.1.map_or(true, |v| v <= 13)
                     && colors.2.map_or(true, |v| v <= 14)
@@ -68,25 +70,26 @@ impl AdventDay for Day02 {
 
             let rounds = parts[1].split(';');
 
-            rounds.for_each(|round| {
-                let max_values =
-                    re_round
-                        .captures_iter(round)
-                        .fold(line_max, |(red, green, blue), cap| {
-                            let value = cap[1].parse().unwrap_or(0);
-                            match &cap[2] {
-                                "red" => (red.max(value), green, blue),
-                                "green" => (red, green.max(value), blue),
-                                "blue" => (red, green, blue.max(value)),
-                                _ => (red, green, blue),
-                            }
-                        });
+            for round in rounds {
+                let mut max_values = line_max;
+
+                for cap in re_round.captures_iter(round) {
+                    let value = cap[1].parse().unwrap_or(0);
+
+                    match &cap[2] {
+                        "red" => max_values.0 = max_values.0.max(value),
+                        "green" => max_values.1 = max_values.1.max(value),
+                        "blue" => max_values.2 = max_values.2.max(value),
+                        _ => (),
+                    }
+                }
+
                 line_max = (
                     line_max.0.max(max_values.0),
                     line_max.1.max(max_values.1),
                     line_max.2.max(max_values.2),
                 );
-            });
+            }
 
             sum += line_max.0 * line_max.1 * line_max.2;
         }
