@@ -31,7 +31,6 @@ impl AdventDay for Day01 {
         }
 
         println!("Answer: {sum}");
-
         Ok(())
     }
 
@@ -78,7 +77,6 @@ impl AdventDay for Day01 {
         }
 
         println!("Answer: {sum}");
-
         Ok(())
     }
 }
