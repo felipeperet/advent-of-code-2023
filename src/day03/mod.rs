@@ -137,7 +137,7 @@ impl AdventDay for Day03 {
                 index += 1;
             }
 
-            number.iter().collect::<String>().parse().unwrap_or(0)
+            number.iter().collect::<String>().parse().unwrap()
         }
 
         let mut adjacent_numbers: Vec<i32> = Vec::new();
@@ -151,7 +151,7 @@ impl AdventDay for Day03 {
                 let mut seen_positions: HashSet<(usize, usize)> = HashSet::new();
                 let mut counter = 0;
 
-                directions.iter().for_each(|(dx, dy)| {
+                for (dx, dy) in directions {
                     let posx = (i as isize + dx) as usize;
                     let posy = (col as isize + dy) as usize;
 
@@ -165,7 +165,7 @@ impl AdventDay for Day03 {
                             counter += 1;
                         }
                     }
-                });
+                }
                 if counter != 2 {
                     for _ in 1..=counter {
                         adjacent_numbers.pop();
