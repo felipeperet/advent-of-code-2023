@@ -22,6 +22,7 @@ fn main() {
         "day01" => run_day(&day01::Day01, part),
         "day02" => run_day(&day02::Day02, part),
         "day03" => run_day(&day03::Day03, part),
+        "day04" => run_day(&day04::Day04, part),
         _ => println!("Day not recognized"),
     }
 }
