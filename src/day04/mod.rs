@@ -24,7 +24,7 @@ impl AdventDay for Day04 {
         let file = File::open(path)?;
         let read = BufReader::new(file);
 
-        let re = Regex::new(r":\s*([\d\s]+)\s*\|\s*([\d\s]+)").unwrap();
+        let re = Regex::new(r":\s([\d\s]+)\|([\d\s]+)").unwrap();
         let mut total = 0;
 
         for line in read.lines() {
