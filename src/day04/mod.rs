@@ -2,7 +2,7 @@ use regex::Regex;
 
 use crate::day_trait::AdventDay;
 use std::{
-    collections::{HashMap, HashSet, VecDeque},
+    collections::HashMap,
     fs::File,
     io::{self, BufRead, BufReader},
 };
@@ -65,11 +65,10 @@ impl AdventDay for Day04 {
         let mut card_multipliers: HashMap<i32, i32> = HashMap::new();
 
         // Example of Regex Match: Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
-        let re = Regex::new(r"Card\s(\d+):\s([\d\s]+)\|([\d\s]+)").unwrap();
+        let re = Regex::new(r"Card\s+(\d+):\s([\d\s]+)\|([\d\s]+)").unwrap();
 
         for (i, line) in read.lines().enumerate() {
             let line = line?;
-            println!("Processing line {}: {}", i + 1, line);
 
             card_multipliers.entry(i as i32 + 1).or_insert(1);
 
@@ -78,17 +77,10 @@ impl AdventDay for Day04 {
                 let winning_numbers: Vec<i32> = parse_numbers(caps.get(2));
                 let received_numbers: Vec<i32> = parse_numbers(caps.get(3));
 
-                println!(
-                    "Card number: {}, Winning numbers: {:?}, Received numbers: {:?}",
-                    card_number, winning_numbers, received_numbers
-                );
-
                 let points: i32 = received_numbers
                     .iter()
                     .filter(|n| winning_numbers.contains(n))
                     .count() as i32;
-
-                println!("Points: {}", points);
 
                 for i in 1..=points {
                     card_multipliers.entry(card_number + i).or_insert(1);
@@ -97,18 +89,11 @@ impl AdventDay for Day04 {
                         card_number + i,
                         card_multipliers[&(card_number + i)] + card_multipliers[&card_number],
                     );
-
-                    println!(
-                        "Updated card multiplier for card {}: {}",
-                        card_number + i,
-                        card_multipliers[&(card_number + i)]
-                    );
                 }
             }
         }
 
         let total_value_sum: i32 = card_multipliers.values().sum();
-        println!("Total sum of card multipliers: {}", total_value_sum);
 
         println!("Answer: {total_value_sum}");
         Ok(())
