@@ -77,12 +77,12 @@ impl AdventDay for Day04 {
                 let winning_numbers: Vec<i32> = parse_numbers(caps.get(2));
                 let received_numbers: Vec<i32> = parse_numbers(caps.get(3));
 
-                let points: i32 = received_numbers
+                let matches: i32 = received_numbers
                     .iter()
                     .filter(|n| winning_numbers.contains(n))
                     .count() as i32;
 
-                for i in 1..=points {
+                for i in 1..=matches {
                     card_multipliers.entry(card_number + i).or_insert(1);
 
                     card_multipliers.insert(
