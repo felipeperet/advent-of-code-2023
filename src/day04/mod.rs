@@ -37,13 +37,9 @@ impl AdventDay for Day04 {
                 let received_numbers: Vec<i32> = parse_numbers(caps.get(2));
 
                 let points: i32 = received_numbers
-                    .clone()
                     .iter()
                     .filter(|n| winning_numbers.contains(n))
-                    .collect::<Vec<&i32>>()
-                    .len()
-                    .try_into()
-                    .unwrap();
+                    .count() as i32;
 
                 if points <= 2 {
                     total += points
