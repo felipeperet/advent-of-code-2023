@@ -2,6 +2,7 @@ mod day01;
 mod day02;
 mod day03;
 mod day04;
+mod day05;
 mod day_trait;
 
 use day_trait::AdventDay;
@@ -23,6 +24,7 @@ fn main() {
         "day02" => run_day(&day02::Day02, part),
         "day03" => run_day(&day03::Day03, part),
         "day04" => run_day(&day04::Day04, part),
+        "day05" => run_day(&day05::Day05, part),
         _ => println!("Day not recognized"),
     }
 }
